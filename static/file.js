@@ -10,8 +10,8 @@ $("#file_upload").on("submit", function(event) {
         url: "/s3_signature",
         method: "POST",
         success: function(data) {
-            console.log(data);
-            uploadfile(f, data.data, data.url);
+            console.log(data['data']);
+            // uploadfile(f, data.data, data.url);
         }
     })
 });
