@@ -39,12 +39,13 @@ function uploadfile(file, s3Data, url) {
             return xhr;
         },
 
-        url: url,
+        url: s3Data.url,
         processData: false,
         contentType: false,
         method: "POST",
         success: function() {
             console.log("uploaded!");
+            $("#image").attr("src", url)
         }
 
     })
