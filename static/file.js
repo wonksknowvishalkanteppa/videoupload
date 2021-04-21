@@ -11,7 +11,7 @@ $("#file_upload").on("submit", function(event) {
         method: "POST",
         success: function(data) {
             data = JSON.parse(data);
-            console.log(data);
+            console.log(data.data, data.url);
             // uploadfile(f, data.data, data.url);
         }
     })
