@@ -1,11 +1,31 @@
 $("#file_upload").on("submit", function(event) {
     event.preventDefault();
-    fd = new FormData();
-
-    file = $("#file")[0].files[0];
-    fd.append("file", file);
+    f = $("#file")[0].files[0];
 
     $.ajax({
+        data: {
+            fname: f.name,
+            ftype: f.type
+        },
+        url: "/s3_signature",
+        method: "POST",
+        success: function(data) {
+            console.log(data);
+            uploadfile(f, data.data, data.url);
+        }
+    })
+});
+
+function uploadfile(file, s3Data, url) {
+    var postData = new FormData();
+    for (key in s3Data.fields) {
+        postData.append(key, s3Data.fields[key]);
+    }
+    postData.append('file', file);
+
+    $.ajax({
+        data: postData,
+
         beforeSend: function() {
             var percentVal = '0%';
             $("#perc").html(percentVal);
@@ -19,28 +39,29 @@ $("#file_upload").on("submit", function(event) {
             return xhr;
         },
 
-        data: fd,
+        url: url,
         processData: false,
         contentType: false,
-        url: "/file",
         method: "POST",
-        success: function(data) {
-            console.log(data);
+        success: function() {
+            console.log("uploaded!");
         }
-    })
-});
 
-$("#file").change(function() {
-    f = $("#file")[0].files[0];
-    $.ajax({
-        data: {
-            fname: f.name,
-            ftype: f.type
-        },
-        url: "/s3_signature",
-        method: "POST",
-        success: function(data) {
-            console.log(data);
-        }
     })
-})
+}
+
+// $("#file").change(function() {
+//     f = $("#file")[0].files[0];
+//     $.ajax({
+//         data: {
+//             fname: f.name,
+//             ftype: f.type
+//         },
+//         url: "/s3_signature",
+//         method: "POST",
+//         success: function(data) {
+//             console.log(data);
+//             uploadfile(f, data.data, data.url);
+//         }
+//     })
+// })
