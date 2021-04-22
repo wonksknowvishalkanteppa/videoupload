@@ -36,6 +36,7 @@ function uploadfile(file, s3Data, url) {
             xhr.upload.onprogress = function(data) {
                 var perc = (data.loaded / data.total) * 100;
                 $('#perc').text(perc.toFixed(2) + '%');
+                $("#loaded").text(data.loaded);
             };
             return xhr;
         },
