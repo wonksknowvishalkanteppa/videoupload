@@ -30,13 +30,14 @@ function uploadfile(file, s3Data, url) {
         beforeSend: function() {
             var percentVal = '0%';
             $("#perc").html(percentVal);
+            $("#loaded").html("0");
         },
         xhr: function() {
             var xhr = $.ajaxSettings.xhr();
             xhr.upload.onprogress = function(data) {
                 var perc = (data.loaded / data.total) * 100;
                 $('#perc').text(perc.toFixed(2) + '%');
-                $("#loaded").html(data.loaded);
+                $("#loaded").html(data.loaded / 1024);
             };
             return xhr;
         },
