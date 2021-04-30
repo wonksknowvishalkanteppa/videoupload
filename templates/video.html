@@ -18,7 +18,9 @@
 
 <body>
     <video autoplay></video>
+    <a href="#" id="download">Download</a>
     <button class="btn btn-outline-dark" id="record" onclick="startRecord()">Start record</button>
+    <button class="btn btn-outline-dark" id="stop" style="display: none;">Stop record</button>
     <div id="error"></div>
     <script src="{{url_for('static',filename='video.js')}}" async defer></script>
 </body>
