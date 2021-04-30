@@ -4,7 +4,8 @@ $("#file_upload").on("submit", function(event) {
     console.log(typeof(f.type));
     $.ajax({
         data: {
-            fname: f.name,
+            // fname: f.name,
+            fname: 'folder/' + f.name,
             ftype: f.type
         },
         url: "/s3_signature",
