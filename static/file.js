@@ -1,7 +1,7 @@
 $("#file_upload").on("submit", function(event) {
     event.preventDefault();
     f = $("#file")[0].files[0];
-    console.log(typeof(f.type));
+    console.log(f.name);
     $.ajax({
         data: {
             // fname: f.name,
