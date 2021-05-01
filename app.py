@@ -37,7 +37,7 @@ def s3_signature():
     S3_BUCKET="vishalk12"
     file_name = request.form['fname']
     file_type = request.form['ftype']
-
+    
     s3 = boto3.client("s3")
     presigned_post = s3.generate_presigned_post(
         Bucket=S3_BUCKET,
